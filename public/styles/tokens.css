@@ -1,0 +1,129 @@
+/* ═══════════════════════════════════════════════════════════
+   골프 AI 스윙 분석 — 디자인 토큰
+   페어웨이 그린 + 아이보리, 밝고 자연친화적 + 테크니컬
+   ═══════════════════════════════════════════════════════════ */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-jp.css');
+
+:root {
+  /* ── Fairway Greens ─────────────────────── */
+  --green-50:  #f2f7f1;
+  --green-100: #e4efe2;
+  --green-200: #c7dec3;
+  --green-300: #9dc597;
+  --green-400: #6ea666;
+  --green-500: #4a8a44;
+  --green-600: #357132;
+  --green-700: #285a27;
+  --green-800: #1f441f;
+  --green-900: #142d15;
+
+  /* ── Ivory / Warm Neutrals ──────────────── */
+  --ivory-50:  #fbfaf5;
+  --ivory-100: #f6f4eb;
+  --ivory-200: #ece8d8;
+  --ivory-300: #ddd7bf;
+  --ivory-400: #b9b296;
+
+  --ink-900: #1a1f1a;
+  --ink-700: #3d443d;
+  --ink-500: #6c7569;
+  --ink-400: #8d9589;
+  --ink-300: #b6bdb2;
+  --ink-200: #d8dcd5;
+  --ink-100: #ececea;
+
+  /* ── Accent: Tech cyan + signal ──────────── */
+  --tech-500: #0a8faf;   /* AI 분석 표시 */
+  --tech-100: #d8ecf1;
+  --signal-amber: #d19b1a;
+  --signal-red:   #c0453a;
+
+  /* ── Semantic ──────────────────────────── */
+  --bg:            var(--ivory-50);
+  --bg-elevated:   #ffffff;
+  --bg-subtle:     var(--ivory-100);
+  --bg-inverted:   var(--green-800);
+  --fg:            var(--ink-900);
+  --fg-muted:      var(--ink-500);
+  --fg-subtle:     var(--ink-400);
+  --line:          var(--ink-200);
+  --line-subtle:   rgba(26, 31, 26, 0.06);
+
+  --brand:         var(--green-600);
+  --brand-hover:   var(--green-700);
+  --brand-bg:      var(--green-50);
+
+  /* ── Radius ─────────────────────────────── */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-full: 999px;
+
+  /* ── Shadow ─────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(26, 44, 20, 0.04), 0 1px 1px rgba(26, 44, 20, 0.03);
+  --shadow-md: 0 2px 6px rgba(26, 44, 20, 0.05), 0 8px 24px rgba(26, 44, 20, 0.06);
+  --shadow-lg: 0 4px 12px rgba(26, 44, 20, 0.06), 0 24px 48px rgba(26, 44, 20, 0.1);
+
+  /* ── Type ───────────────────────────────── */
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "tnum";
+}
+button { font-family: inherit; }
+
+/* Scrollbar tuning for card content */
+.app-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.app-scroll::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════════════════
+   Hero placeholder — 자연 그린 그라디언트 + 골프장 암시 레이어
+   이미지 교체 시 .hero-photo img { object-fit: cover } 사용
+   ═══════════════════════════════════════════════════════════ */
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255,250,230,0.5), transparent 55%),
+    radial-gradient(ellipse at 70% 90%, rgba(26,68,31,0.35), transparent 60%),
+    linear-gradient(160deg, #a8c99e 0%, #6fa56a 35%, #3d7a3b 70%, #1f441f 100%);
+}
+.hero-photo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(178deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 22px);
+  pointer-events: none;
+}
+
+/* Silhouette of golfer (SVG placeholder drawn inline) */
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: var(--r-full);
+  background: var(--ivory-100);
+  color: var(--ink-700);
+  border: 1px solid var(--line);
+}
+.chip.tech { background: var(--tech-100); color: #08627a; border-color: transparent; }
+.chip.green { background: var(--green-50); color: var(--green-700); border-color: transparent; }
+.chip.dot::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; display: inline-block;
+}
