@@ -3,8 +3,6 @@ import { prisma } from '@/lib/prisma'
 import { Resend } from 'resend'
 import crypto from 'crypto'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json()
@@ -28,22 +26,23 @@ export async function POST(req: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
     const resetUrl = `${baseUrl}/reset-password?token=${token}`
 
+    const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
-      from: 'noreply@insure.dbzone.kr',
+      from: 'noreply@golf.dbzone.kr',
       to: email,
-      subject: '[보험 중복 분석기] 비밀번호 재설정',
+      subject: '[Vertex AI 골프 코칭] 비밀번호 재설정',
       html: `
-        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#1e1a14;color:#f0ebe0;border-radius:12px;">
-          <h2 style="color:#d4b483;margin-bottom:8px;">비밀번호 재설정</h2>
-          <p style="color:#c4b49a;font-size:14px;line-height:1.6;">
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#f8faf7;color:#1a1f1a;border-radius:12px;border:1px solid #d4e4d0;">
+          <h2 style="color:#357132;margin-bottom:8px;">비밀번호 재설정</h2>
+          <p style="color:#4a5e48;font-size:14px;line-height:1.6;">
             아래 버튼을 클릭해 비밀번호를 재설정해주세요.<br/>
             링크는 <strong>30분</strong> 후 만료됩니다.
           </p>
           <a href="${resetUrl}"
-            style="display:inline-block;margin-top:24px;padding:12px 28px;background:linear-gradient(to bottom,#f5d060,#c4892a);color:#1e1408;font-weight:700;font-size:14px;border-radius:10px;text-decoration:none;">
+            style="display:inline-block;margin-top:24px;padding:12px 28px;background:#357132;color:#ffffff;font-weight:700;font-size:14px;border-radius:50px;text-decoration:none;">
             비밀번호 재설정하기
           </a>
-          <p style="margin-top:24px;font-size:12px;color:#7a7060;">
+          <p style="margin-top:24px;font-size:12px;color:#8a9e88;">
             이 요청을 하지 않으셨다면 무시하셔도 됩니다.
           </p>
         </div>
