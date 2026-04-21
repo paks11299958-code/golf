@@ -49,13 +49,14 @@ export default function LandingPage() {
       <header className="glass-nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 20px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-            <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: '-0.4px', color: 'var(--ink-900)' }}>
-              <span style={{ color: "var(--green-600)" }}>Vertex AI</span> 골프 코칭
+            <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: 'var(--green-600)' }}>Vertex AI</span>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: '#5F6368' }}>Golf Coach</span>
             </span>
           </Link>
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="hidden md:flex">
-            {[{ href: '/', label: '홈' }, { href: '/analyze', label: 'Vertex AI 스윙 분석' }, { href: '/dashboard', label: '분석 내역' }].map(item => (
+            {[{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }].map(item => (
               <Link key={item.href} href={item.href}
                 style={{ padding: '8px 16px', borderRadius: 'var(--r-xl)', fontSize: 13, fontWeight: 500, color: 'var(--fg-muted)', textDecoration: 'none', transition: 'all 0.2s' }}
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color = 'var(--ink-900)'; el.style.background = 'var(--green-50)' }}
@@ -106,7 +107,7 @@ export default function LandingPage() {
 
         {menuOpen && (
           <div className="md:hidden fade-in-up" style={{ borderTop: '1px solid var(--line)', padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 4, background: 'var(--ivory-50)' }}>
-            {[{ href: '/', label: '홈' }, { href: '/analyze', label: 'Vertex AI 스윙 분석' }, { href: '/dashboard', label: '분석 내역' }].map(item => (
+            {[{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }].map(item => (
               <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)}
                 style={{ padding: '12px 16px', borderRadius: 'var(--r-md)', fontSize: 14, fontWeight: 500, color: 'var(--ink-700)', textDecoration: 'none' }}>
                 {item.label}
@@ -296,7 +297,7 @@ export default function LandingPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                {[{ href: '/', label: '홈' }, { href: '/analyze', label: 'Vertex AI 분석' }, { href: '/dashboard', label: '분석 내역' }, { href: '/login', label: '로그인' }].map(item => (
+                {[{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }, { href: '/login', label: '로그인' }].map(item => (
                   <Link key={item.href} href={item.href}
                     style={{ fontSize: 12, color: 'var(--fg-muted)', textDecoration: 'none', transition: 'color 0.2s' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--green-700)'}

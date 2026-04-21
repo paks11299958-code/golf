@@ -36,7 +36,7 @@ interface AuthUser { id: number; email: string; username?: string }
 
 const NAV_ITEMS = [
   { href: '/', label: '홈' },
-  { href: '/analyze', label: 'Vertex AI 분석' },
+  { href: '/analyze', label: '스윙 분석' },
   { href: '/dashboard', label: '분석 내역' },
 ]
 
@@ -119,8 +119,9 @@ export default function ReportPage() {
       <nav className="glass-nav print:hidden sticky top-0 z-50">
         <div className="max-w-[1120px] mx-auto px-5 h-[60px] flex items-center justify-between">
           <Link href="/" className="flex items-center shrink-0" style={{ textDecoration: 'none' }}>
-            <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: '-0.4px', color: 'var(--ink-900)' }}>
-              <span style={{ color: "var(--green-600)" }}>Vertex AI</span> 골프 코칭
+            <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: 'var(--green-600)' }}>Vertex AI</span>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: '#5F6368' }}>Golf Coach</span>
             </span>
           </Link>
 

@@ -91,7 +91,7 @@ async function extractVideoFrames(file: File, count = 6): Promise<{ data: string
 }
 
 const SKILL_LEVELS = ['초급', '중급', '고급', '프로']
-const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: 'Vertex AI 분석' }, { href: '/dashboard', label: '분석 내역' }]
+const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }]
 
 const SV = {
   높음: { color: 'var(--signal-red)',   bg: 'rgba(192,69,58,0.08)',   border: 'rgba(192,69,58,0.25)' },
@@ -277,8 +277,9 @@ export default function AnalyzePage() {
       <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-            <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: '-0.4px', color: 'var(--ink-900)' }}>
-              <span style={{ color: "var(--green-600)" }}>Vertex AI</span> 골프 코칭
+            <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: 'var(--green-600)' }}>Vertex AI</span>
+              <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '-0.3px', color: '#5F6368' }}>Golf Coach</span>
             </span>
           </Link>
 
