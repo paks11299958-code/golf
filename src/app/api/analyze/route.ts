@@ -3,10 +3,17 @@ import { GoogleGenAI } from '@google/genai'
 
 export const maxDuration = 60
 
+const credJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
 const ai = new GoogleGenAI({
   vertexai: true,
   project: process.env.GOOGLE_CLOUD_PROJECT,
   location: process.env.GOOGLE_CLOUD_LOCATION || 'us-central1',
+  ...(credJson && {
+    googleAuthOptions: {
+      credentials: JSON.parse(credJson),
+      scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    }
+  }),
 })
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
