@@ -55,7 +55,7 @@ export default function LandingPage() {
             </span>
           </Link>
 
-          <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="hidden md:flex">
+          <nav style={{ alignItems: 'center', gap: 4 }} className="hidden md:flex">
             {[{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }].map(item => (
               <Link key={item.href} href={item.href}
                 style={{ padding: '8px 16px', borderRadius: 'var(--r-xl)', fontSize: 13, fontWeight: 500, color: 'var(--fg-muted)', textDecoration: 'none', transition: 'all 0.2s' }}
@@ -66,7 +66,7 @@ export default function LandingPage() {
             ))}
           </nav>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }} className="hidden md:flex">
+          <div style={{ alignItems: 'center', gap: 8, flexShrink: 0 }} className="hidden md:flex">
             {authUser ? (
               <>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderRadius: 'var(--r-xl)', background: 'var(--green-50)', border: '1px solid var(--green-200)' }}>

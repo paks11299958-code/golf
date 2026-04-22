@@ -283,7 +283,7 @@ export default function AnalyzePage() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <nav className="hidden md:flex" style={{ alignItems: 'center', gap: 4 }}>
             {NAV_ITEMS.map(item => (
               <Link key={item.href} href={item.href}
                 style={item.href === '/analyze'
@@ -296,7 +296,7 @@ export default function AnalyzePage() {
             ))}
           </nav>
 
-          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 8, flexShrink: 0 }}>
             {authUser ? (
               <>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 12px', borderRadius: 'var(--r-xl)', background: 'var(--green-50)', border: '1px solid var(--green-200)' }}>
