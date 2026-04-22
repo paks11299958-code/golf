@@ -106,6 +106,19 @@ function parseJSON(raw: string) {
   }
 }
 
+function boostScores(result: Record<string, unknown>) {
+  const cap = (n: unknown) => typeof n === 'number' ? Math.min(100, Math.round(n * 1.1)) : n
+  if (result.summary && typeof result.summary === 'object') {
+    const s = result.summary as Record<string, unknown>
+    s.overallScore = cap(s.overallScore)
+  }
+  if (result.phaseScores && typeof result.phaseScores === 'object') {
+    const p = result.phaseScores as Record<string, unknown>
+    for (const key of Object.keys(p)) p[key] = cap(p[key])
+  }
+  return result
+}
+
 async function analyzeWithImages(
   images: { data: string; mediaType: string }[],
   fileNames: string[],
@@ -129,7 +142,7 @@ ${formatGolferInfo(golferInfo)}`
     contents: [{ role: 'user', parts: [...imageParts, { text: prompt }] }],
   })
 
-  return parseJSON(response.text ?? '')
+  return boostScores(parseJSON(response.text ?? ''))
 }
 
 async function analyzeWithText(text: string, fileNames: string[], golferInfo?: GolferInfo) {
@@ -147,7 +160,7 @@ ${formatGolferInfo(golferInfo)}`
     contents: [{ role: 'user', parts: [{ text: prompt }] }],
   })
 
-  return parseJSON(response.text ?? '')
+  return boostScores(parseJSON(response.text ?? ''))
 }
 
 function errJson(message: string, status: number) {
