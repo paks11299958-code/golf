@@ -144,8 +144,7 @@ export default function AnalyzePage() {
       const next = Array.from(list).filter(f => !names.has(f.name)).map(f => ({ file: f, name: f.name, size: f.size }))
       const merged = [...prev, ...next].slice(0, MAX_FILES)
       const vid = merged.filter(f => isVideo(f.name)).at(-1)
-      if (vid) setVideoPreview(URL.createObjectURL(vid.file))
-      else setVideoPreview(null)
+      setVideoPreview(prev => { if (prev) URL.revokeObjectURL(prev); return vid ? URL.createObjectURL(vid.file) : null })
       return merged
     })
   }, [])
@@ -154,7 +153,7 @@ export default function AnalyzePage() {
     setFiles(prev => {
       const next = prev.filter((_, j) => j !== i)
       const vid = next.filter(f => isVideo(f.name)).at(-1)
-      setVideoPreview(vid ? URL.createObjectURL(vid.file) : null)
+      setVideoPreview(prev => { if (prev) URL.revokeObjectURL(prev); return vid ? URL.createObjectURL(vid.file) : null })
       return next
     })
   }

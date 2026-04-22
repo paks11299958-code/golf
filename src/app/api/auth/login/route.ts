@@ -3,9 +3,23 @@ import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { SignJWT } from 'jose'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+
+const loginRateMap = new Map<string, { count: number; resetAt: number }>()
+function checkLoginRate(ip: string): boolean {
+  const now = Date.now()
+  const entry = loginRateMap.get(ip)
+  if (!entry || now > entry.resetAt) { loginRateMap.set(ip, { count: 1, resetAt: now + 3600_000 }); return true }
+  if (entry.count >= 10) return false
+  entry.count++
+  return true
+}
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown'
+  if (!checkLoginRate(ip))
+    return NextResponse.json({ error: '로그인 시도 횟수를 초과했습니다. 1시간 후 다시 시도해주세요.' }, { status: 429 })
+
   try {
     const { email, password } = await req.json()
 

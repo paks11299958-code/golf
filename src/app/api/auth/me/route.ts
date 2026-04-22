@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get('auth-token')?.value

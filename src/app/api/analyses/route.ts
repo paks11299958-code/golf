@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { jwtVerify } from 'jose'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
 async function getUser(req: NextRequest) {
   const token = req.cookies.get('auth-token')?.value
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
   const analyses = await prisma.analysis.findMany({
     where: { userId: user.id },
     orderBy: { createdAt: 'desc' },
-    take: 100,
+    take: 500,
   })
   return NextResponse.json(analyses)
 }

@@ -107,7 +107,7 @@ function parseJSON(raw: string) {
 }
 
 function boostScores(result: Record<string, unknown>) {
-  const cap = (n: unknown) => typeof n === 'number' ? Math.min(100, Math.round(n * 1.1)) : n
+  const cap = (n: unknown) => typeof n === 'number' ? Math.min(100, Math.max(0, Math.round(n * 1.1))) : n
   if (result.summary && typeof result.summary === 'object') {
     const s = result.summary as Record<string, unknown>
     s.overallScore = cap(s.overallScore)

@@ -42,6 +42,7 @@ export default function DashboardPage() {
   const [toast, setToast]         = useState<Toast | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const deleteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
   const filtered = analyses.filter(a => (a.title||'').toLowerCase().includes(search.toLowerCase()))
@@ -53,7 +54,7 @@ export default function DashboardPage() {
     fetch('/api/auth/me').then(r=>r.json()).then(u => {
       if (!u||!u.id) { router.push('/login'); return }
       setAuthUser(u)
-      fetch('/api/analyses').then(r=>r.json()).then(data => { setAnalyses(Array.isArray(data)?data:[]); setLoading(false) })
+      fetch('/api/analyses').then(r=>r.json()).then(data => { setAnalyses(Array.isArray(data)?data:[]); setLoading(false) }).catch(() => setLoading(false))
     })
   }, [router])
   useEffect(() => {
@@ -70,20 +71,26 @@ export default function DashboardPage() {
     toastTimer.current = setTimeout(() => setToast(null), 4000)
   }, [])
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = (id: number) => {
     const target = analyses.find(a => a.id === id)
     if (!target) return
-    setConfirmId(null); setAnalyses(prev => prev.filter(a => a.id !== id)); showToast('삭제되었습니다.', target)
-    const res = await fetch(`/api/analyses/${id}`, { method: 'DELETE' })
-    if (!res.ok) { setAnalyses(prev => [target, ...prev].sort((a, b) => b.id-a.id)); showToast('삭제에 실패했습니다.') }
+    setConfirmId(null)
+    setAnalyses(prev => prev.filter(a => a.id !== id))
+    showToast('삭제되었습니다.', target)
+    if (deleteTimerRef.current) clearTimeout(deleteTimerRef.current)
+    deleteTimerRef.current = setTimeout(async () => {
+      deleteTimerRef.current = null
+      const res = await fetch(`/api/analyses/${id}`, { method: 'DELETE' })
+      if (!res.ok) { setAnalyses(prev => [target, ...prev].sort((a, b) => b.id - a.id)); showToast('삭제에 실패했습니다.') }
+    }, 4000)
   }
-  const handleUndo = async () => {
+  const handleUndo = () => {
     if (!toast?.deletedItem) return
-    const item = toast.deletedItem; setToast(null)
+    if (deleteTimerRef.current) { clearTimeout(deleteTimerRef.current); deleteTimerRef.current = null }
     if (toastTimer.current) clearTimeout(toastTimer.current)
-    setAnalyses(prev => [item, ...prev].sort((a, b) => b.id-a.id))
-    const res = await fetch('/api/analyses'); const data = await res.json()
-    setAnalyses(Array.isArray(data) ? data : [])
+    const item = toast.deletedItem
+    setToast(null)
+    setAnalyses(prev => [item, ...prev].sort((a, b) => b.id - a.id))
   }
 
   if (loading) return (

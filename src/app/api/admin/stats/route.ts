@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { jwtVerify } from 'jose'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
 async function verifyAdmin(req: NextRequest) {
   const token = req.cookies.get('auth-token')?.value
