@@ -44,7 +44,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     // 관리자가 답글을 달았을 때만 작성자에게 이메일 알림
     if (isAdmin && !isAuthor) {
       try {
-        const resend = new Resend(process.env.RESEND_API_KEY)
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
         await sendEmail({
           to: post.user.email,
