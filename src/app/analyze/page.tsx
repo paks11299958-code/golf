@@ -91,7 +91,7 @@ async function extractVideoFrames(file: File, count = 6): Promise<{ data: string
 }
 
 const SKILL_LEVELS = ['초급', '중급', '고급', '프로']
-const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }]
+const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }, { href: '/board', label: '소통게시판' }]
 
 const SV = {
   높음: { color: 'var(--signal-red)',   bg: 'rgba(192,69,58,0.08)',   border: 'rgba(192,69,58,0.25)' },

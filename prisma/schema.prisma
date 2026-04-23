@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                Int           @id @default(autoincrement())
+  email             String        @unique
+  password          String
+  username          String?
+  role              String        @default("USER")
+  resetToken        String?
+  resetTokenExpiry  DateTime?
+  createdAt         DateTime      @default(now())
+  analyses          Analysis[]
+  boardPosts        BoardPost[]
+  boardReplies      BoardReply[]
+}
+
+model BoardPost {
+  id        Int          @id @default(autoincrement())
+  userId    Int
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  replies   BoardReply[]
+}
+
+model BoardReply {
+  id          Int       @id @default(autoincrement())
+  postId      Int
+  post        BoardPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  isAdminReply Boolean  @default(false)
+  content     String
+  createdAt   DateTime  @default(now())
+}
+
+model Analysis {
+  id         Int      @id @default(autoincrement())
+  userId     Int?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String?
+  gender     String?
+  age        String?
+  job        String?
+  health     String?
+  purpose    String?
+  budget     String?
+  fileNames  String?
+  result     Json?
+  createdAt  DateTime @default(now())
+}

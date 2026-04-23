@@ -52,10 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Analysis: 'Analysis',
-  UserCodefInfo: 'UserCodefInfo',
-  Credit4uAccount: 'Credit4uAccount',
-  CodefToken: 'CodefToken'
+  BoardPost: 'BoardPost',
+  BoardReply: 'BoardReply',
+  Analysis: 'Analysis'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -88,6 +87,30 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const BoardPostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardPostScalarFieldEnum = (typeof BoardPostScalarFieldEnum)[keyof typeof BoardPostScalarFieldEnum]
+
+
+export const BoardReplyScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  isAdminReply: 'isAdminReply',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardReplyScalarFieldEnum = (typeof BoardReplyScalarFieldEnum)[keyof typeof BoardReplyScalarFieldEnum]
+
+
 export const AnalysisScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -104,44 +127,6 @@ export const AnalysisScalarFieldEnum = {
 } as const
 
 export type AnalysisScalarFieldEnum = (typeof AnalysisScalarFieldEnum)[keyof typeof AnalysisScalarFieldEnum]
-
-
-export const UserCodefInfoScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  connectedId: 'connectedId',
-  lastSyncAt: 'lastSyncAt',
-  createdAt: 'createdAt'
-} as const
-
-export type UserCodefInfoScalarFieldEnum = (typeof UserCodefInfoScalarFieldEnum)[keyof typeof UserCodefInfoScalarFieldEnum]
-
-
-export const Credit4uAccountScalarFieldEnum = {
-  id: 'id',
-  ssnHash: 'ssnHash',
-  credit4uId: 'credit4uId',
-  credit4uPw: 'credit4uPw',
-  registeredAt: 'registeredAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type Credit4uAccountScalarFieldEnum = (typeof Credit4uAccountScalarFieldEnum)[keyof typeof Credit4uAccountScalarFieldEnum]
-
-
-export const CodefTokenScalarFieldEnum = {
-  id: 'id',
-  clientId: 'clientId',
-  accessToken: 'accessToken',
-  tokenType: 'tokenType',
-  expiresIn: 'expiresIn',
-  issuedAt: 'issuedAt',
-  expiresAt: 'expiresAt',
-  refreshToken: 'refreshToken',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CodefTokenScalarFieldEnum = (typeof CodefTokenScalarFieldEnum)[keyof typeof CodefTokenScalarFieldEnum]
 
 
 export const SortOrder = {

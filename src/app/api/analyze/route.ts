@@ -74,6 +74,14 @@ interface GolferInfo {
   health?: string; purpose?: string; budget?: string
 }
 
+const BEGINNER_PROMPT = `
+[초급자 언어 지침 — 반드시 준수]
+- 골프 전문 용어(어드레스, 임팩트, 폴로스루 등)를 사용할 경우 반드시 괄호 안에 쉬운 설명을 추가 (예: 임팩트(공을 치는 순간))
+- 문장은 짧고 단순하게. 한 문장에 한 가지 내용만
+- "척추각", "코킹", "힙턴" 같은 어려운 용어 대신 "허리를 곧게 세우는 것", "손목을 꺾는 동작", "골반을 돌리는 것" 처럼 누구나 이해할 수 있는 표현 사용
+- 드릴 설명은 "이렇게 해보세요" 형식으로 구체적이고 단계별로
+- 격려 표현을 더 많이 사용해서 초보자가 위축되지 않도록`
+
 function formatGolferInfo(u?: GolferInfo): string {
   if (!u) return ''
   const parts: string[] = []
@@ -84,7 +92,8 @@ function formatGolferInfo(u?: GolferInfo): string {
   if (u.purpose) parts.push(`주요문제: ${u.purpose}`)
   if (u.budget) parts.push(`사용클럽: ${u.budget}`)
   if (parts.length === 0) return ''
-  return `\n\n[골퍼 정보 — 반드시 분석에 반영]\n${parts.join('\n')}`
+  const base = `\n\n[골퍼 정보 — 반드시 분석에 반영]\n${parts.join('\n')}`
+  return u.age === '초급' ? base + BEGINNER_PROMPT : base
 }
 
 function parseJSON(raw: string) {

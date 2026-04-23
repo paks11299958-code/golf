@@ -47,22 +47,17 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model BoardPost
+ * 
+ */
+export type BoardPost = Prisma.BoardPostModel
+/**
+ * Model BoardReply
+ * 
+ */
+export type BoardReply = Prisma.BoardReplyModel
+/**
  * Model Analysis
  * 
  */
 export type Analysis = Prisma.AnalysisModel
-/**
- * Model UserCodefInfo
- * 
- */
-export type UserCodefInfo = Prisma.UserCodefInfoModel
-/**
- * Model Credit4uAccount
- * 
- */
-export type Credit4uAccount = Prisma.Credit4uAccountModel
-/**
- * Model CodefToken
- * 
- */
-export type CodefToken = Prisma.CodefTokenModel

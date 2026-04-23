@@ -28,7 +28,7 @@ const truncateFiles = (names: string) => {
   return list.length <= 1 ? names : `${list[0]} 외 ${list.length-1}개`
 }
 
-const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }]
+const NAV_ITEMS = [{ href: '/', label: '홈' }, { href: '/analyze', label: '스윙 분석' }, { href: '/dashboard', label: '분석 내역' }, { href: '/board', label: '소통게시판' }]
 
 export default function DashboardPage() {
   const router = useRouter()

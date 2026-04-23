@@ -38,6 +38,7 @@ const NAV_ITEMS = [
   { href: '/', label: '홈' },
   { href: '/analyze', label: '스윙 분석' },
   { href: '/dashboard', label: '분석 내역' },
+  { href: '/board', label: '소통게시판' },
 ]
 
 export default function ReportPage() {
