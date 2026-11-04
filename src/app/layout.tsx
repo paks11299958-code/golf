@@ -10,7 +10,10 @@ export const metadata: Metadata = {
     title: 'Vertex AI 기술 기반 골프 스윙 분석기',
     description: 'Vertex AI가 내 골프 스윙을 분석하고 맞춤 교정 드릴을 알려드립니다',
     url: 'https://golf.dbzone.kr',
-  }
+  },
+  manifest: '/manifest.webmanifest',
+  icons: { icon: [{ url: '/icons/favicon-48.png', sizes: '48x48', type: 'image/png' }], apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }] },
+  appleWebApp: { capable: true, title: 'Golf Coach', statusBarStyle: 'default' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

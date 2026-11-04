@@ -1,4 +1,5 @@
 'use client'
+import InstallShortcut from '@/components/InstallShortcut'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -113,6 +114,7 @@ export default function LandingPage() {
                 {item.label}
               </Link>
             ))}
+            <InstallShortcut />
             <div style={{ borderTop: '1px solid var(--green-100)', marginTop: 8, paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
               {authUser ? (
                 <button onClick={handleLogout} style={{ padding: '12px 16px', borderRadius: 'var(--r-md)', fontSize: 14, textAlign: 'left', color: 'var(--fg-muted)', background: 'transparent', border: 'none', cursor: 'pointer' }}>로그아웃</button>
